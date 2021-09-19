@@ -7,3 +7,88 @@ source ./venv/bin/activate
 stop venv 
 deactivate
 
+start project django
+django-admin startproject name .
+
+run server 
+python manage.py runserver
+
+create app
+python manage.py startapp name
+
+register template folder
+os.path.join(base_dir, 'template')
+
+Static Files
+STATIC_ROOT = os.path.join(base_dir, 'static')
+STATICFILES_DIRS = [
+    os.path.join(base_dir, 'btre/static')
+]
+python manage.py collectstatic
+
+Load static Files
+{% load static %}
+href= "{% static 'css/name.css' %}"
+
+Load and include html
+{% extends 'base.html' %}
+{% include 'location/name.html' %}
+
+install postgres
+sudo apt install postgresql
+
+open postgres terminal
+psql -U postgres -h localhost
+password = root
+
+postgres with python
+psycopg2
+psycopg2-binary
+
+migrations
+python manage.py migrate # only 1st time
+python manage.py makemigrations # create migrate Files
+python manage.py migrate
+
+# add models to admin
+admin.site.register(name)
+
+# Media Files
+MEDIA_ROOT = os.path.join(base_dir, 'media')
+MEDIA_URL = '/media/'
+# urls.py (main)
+urlpatterns = []+ static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
+
+
+# Deployment
+pip install gunicorn
+pip install django-heroku
+pip install python-decouple
+
+create Procfile
+web: gunicorn name.wsgi
+
+# in settings.py
+import django_heroku
+import dj_database_url
+from decouple import config
+
+MIDDLEWARE = [ ,
+'whitenoise.middleware.WhiteNoiseMiddleware']
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+django_heroku.settings(locals())
+
+# heroku
+heroku login
+heroku keys:add
+heroku create
+heroku rename <websitename>
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+# push to heroku
+git push heroku master
+
+# create ssh 
+ssh-keygen -t rsa
