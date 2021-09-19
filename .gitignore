@@ -61,7 +61,7 @@ celerybeat.pid
 .env/
 .venv/
 env/
-venv/
+venv
 ENV/
 env.bak/
 venv.bak/
@@ -82,3 +82,5 @@ venv
 /static
 Cheat Sheet
 .gitignore
+
+.vscode
